@@ -18,7 +18,7 @@ function init() {
 
     // Build function for Demographics info
     function buildTable(sample) {
-    d3.json("./data/samples.json").then((data) => {
+    d3.json("./data/samples.json").then(data => {
         // Variables created to hold metadata array, filter it for selected ID, 
         // and hold selected data.
         var sampledata = data.metadata;
@@ -39,7 +39,7 @@ function init() {
   
     // Build functions for all the plots
     function buildPlots(sample) {
-    d3.json("./data/samples.json").then((data) => {
+    d3.json("./data/samples.json").then(data => {
         // Variables created to hold samples array, filter for selected ID,
         // and hold selected data.
         var sampleData = data.samples;
@@ -84,9 +84,9 @@ function init() {
         text: otu_labels,
         mode: 'markers',
         marker: {
-          color: otu_ids,
-          colorscale: "Portland", 
-          size: sample_values}
+            color: otu_ids,
+            colorscale: "Portland", 
+            size: sample_values}
         };
         var bubbleData = [bubbletrace];
         var bubbleLayout = {
@@ -99,14 +99,14 @@ function init() {
 
         // gauge plot trace, data, and layout
         var gaugetrace = {
-        domain: {x:[0,1], y:[0,1]},
         type: "indicator",
         mode: "gauge+number",
         value: washingFreq,
-        title: "<b>Belly Button Washing Frequency</b><br>Scrubs per Week",
+        title: { text: "Belly Button Washes per Week", size: 20},
+        // title: "<b>Frequency of Belly Button</b><br>Scrubs per Week</br>",
         gauge:{
-            axis: {range: [null, 10]},
-            bar: {color: "black"},
+            axis: {range: [null, 10], tickwidth: 2},
+            bar: {color: "gray"},
             steps: [{range:[0,2], color: "red"}, 
                 {range:[2,4], color: "orange"}, 
                 {range:[4,6], color: "yellow"}, 
@@ -115,8 +115,8 @@ function init() {
         };
         var gaugeData = [gaugetrace];
         var gaugeLayout = { 
-        width: 450,
-        height: 360,
+        width: 475,
+        height: 350,
         margin: {}
         };
         Plotly.newPlot("gauge", gaugeData, gaugeLayout);
